@@ -7,5 +7,5 @@ lazy val root = project
     organization := "com.amazonaws",
     name := "aws-scala-sdk-${service}",
     version := "0.0.1",
-    libraryDependencies += "com.amazonaws" % "aws-java-sdk-${service}" % "1.9.27"
+    libraryDependencies += "com.amazonaws" % "aws-java-sdk-${service}" % "1.10.0"
   )

@@ -5,7 +5,7 @@ lazy val root = project
   .in(file("."))
   .settings(
     organization := "com.amazonaws",
-    name := "aws-scala-sdk-kinesis",
+    name := "aws-scala-sdk-dynamodb",
     version := "0.0.1",
-    libraryDependencies += "com.amazonaws" % "aws-java-sdk-kinesis" % "1.10.0"
+    libraryDependencies += "com.amazonaws" % "aws-java-sdk-dynamodb" % "1.10.0"
   )

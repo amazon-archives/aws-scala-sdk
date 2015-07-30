@@ -18,6 +18,7 @@ import scala.concurrent.Future
 import scala.concurrent.Promise
 
 import com.amazonaws.AmazonWebServiceRequest
+import com.amazonaws.RequestClientOptions
 import com.amazonaws.handlers.AsyncHandler
 import com.amazonaws.regions.Region
 import com.amazonaws.regions.Regions
@@ -121,6 +122,11 @@ class AmazonDynamoDBClient(
       method: (Request, AsyncHandler[Request, Result]) => java.util.concurrent.Future[Result],
       request: Request): Future[Result] = {
 
+    val opts = request.getRequestClientOptions()
+    if (opts.getClientMarker(RequestClientOptions.Marker.USER_AGENT) == null) {
+      opts.appendUserAgent("aws-scala-sdk")
+    }
+
     val promise = Promise[Result]
 
     method(request, new AsyncHandler[Request, Result]() {
@@ -134,6 +140,11 @@ class AmazonDynamoDBClient(
   private def invokeVoid[Request <: AmazonWebServiceRequest](
       method: (Request, AsyncHandler[Request, Void]) => java.util.concurrent.Future[Void],
       request: Request): Future[Unit] = {
+
+    val opts = request.getRequestClientOptions()
+    if (opts.getClientMarker(RequestClientOptions.Marker.USER_AGENT) == null) {
+      opts.appendUserAgent("aws-scala-sdk")
+    }
 
     val promise = Promise[Unit]
     

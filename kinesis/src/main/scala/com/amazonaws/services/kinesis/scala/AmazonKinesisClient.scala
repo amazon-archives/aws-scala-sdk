@@ -18,6 +18,7 @@ import scala.concurrent.Future
 import scala.concurrent.Promise
 
 import com.amazonaws.AmazonWebServiceRequest
+import com.amazonaws.RequestClientOptions
 import com.amazonaws.handlers.AsyncHandler
 import com.amazonaws.regions.Region
 import com.amazonaws.regions.Regions
@@ -37,40 +38,34 @@ class AmazonKinesisClient(
 
   def this(region: Regions) = this(Region.getRegion(region))
 
-  def addTagsToStream(request: com.amazonaws.services.kinesis.model.AddTagsToStreamRequest):
-      Future[Unit] = {
-
-    invokeVoid(client.addTagsToStreamAsync, request)
-  }
-
   def createStream(request: com.amazonaws.services.kinesis.model.CreateStreamRequest):
       Future[Unit] = {
 
     invokeVoid(client.createStreamAsync, request)
   }
 
-  def mergeShards(request: com.amazonaws.services.kinesis.model.MergeShardsRequest):
-      Future[Unit] = {
-
-    invokeVoid(client.mergeShardsAsync, request)
-  }
-
-  def removeTagsFromStream(request: com.amazonaws.services.kinesis.model.RemoveTagsFromStreamRequest):
-      Future[Unit] = {
-
-    invokeVoid(client.removeTagsFromStreamAsync, request)
-  }
-
-  def listStreams(request: com.amazonaws.services.kinesis.model.ListStreamsRequest):
-      Future[com.amazonaws.services.kinesis.model.ListStreamsResult] = {
-
-    invoke(client.listStreamsAsync, request)
-  }
-
   def putRecord(request: com.amazonaws.services.kinesis.model.PutRecordRequest):
       Future[com.amazonaws.services.kinesis.model.PutRecordResult] = {
 
     invoke(client.putRecordAsync, request)
+  }
+
+  def addTagsToStream(request: com.amazonaws.services.kinesis.model.AddTagsToStreamRequest):
+      Future[Unit] = {
+
+    invokeVoid(client.addTagsToStreamAsync, request)
+  }
+
+  def putRecords(request: com.amazonaws.services.kinesis.model.PutRecordsRequest):
+      Future[com.amazonaws.services.kinesis.model.PutRecordsResult] = {
+
+    invoke(client.putRecordsAsync, request)
+  }
+
+  def describeStream(request: com.amazonaws.services.kinesis.model.DescribeStreamRequest):
+      Future[com.amazonaws.services.kinesis.model.DescribeStreamResult] = {
+
+    invoke(client.describeStreamAsync, request)
   }
 
   def getShardIterator(request: com.amazonaws.services.kinesis.model.GetShardIteratorRequest):
@@ -85,18 +80,6 @@ class AmazonKinesisClient(
     invoke(client.listTagsForStreamAsync, request)
   }
 
-  def putRecords(request: com.amazonaws.services.kinesis.model.PutRecordsRequest):
-      Future[com.amazonaws.services.kinesis.model.PutRecordsResult] = {
-
-    invoke(client.putRecordsAsync, request)
-  }
-
-  def deleteStream(request: com.amazonaws.services.kinesis.model.DeleteStreamRequest):
-      Future[Unit] = {
-
-    invokeVoid(client.deleteStreamAsync, request)
-  }
-
   def getRecords(request: com.amazonaws.services.kinesis.model.GetRecordsRequest):
       Future[com.amazonaws.services.kinesis.model.GetRecordsResult] = {
 
@@ -109,10 +92,28 @@ class AmazonKinesisClient(
     invokeVoid(client.splitShardAsync, request)
   }
 
-  def describeStream(request: com.amazonaws.services.kinesis.model.DescribeStreamRequest):
-      Future[com.amazonaws.services.kinesis.model.DescribeStreamResult] = {
+  def removeTagsFromStream(request: com.amazonaws.services.kinesis.model.RemoveTagsFromStreamRequest):
+      Future[Unit] = {
 
-    invoke(client.describeStreamAsync, request)
+    invokeVoid(client.removeTagsFromStreamAsync, request)
+  }
+
+  def listStreams(request: com.amazonaws.services.kinesis.model.ListStreamsRequest):
+      Future[com.amazonaws.services.kinesis.model.ListStreamsResult] = {
+
+    invoke(client.listStreamsAsync, request)
+  }
+
+  def deleteStream(request: com.amazonaws.services.kinesis.model.DeleteStreamRequest):
+      Future[Unit] = {
+
+    invokeVoid(client.deleteStreamAsync, request)
+  }
+
+  def mergeShards(request: com.amazonaws.services.kinesis.model.MergeShardsRequest):
+      Future[Unit] = {
+
+    invokeVoid(client.mergeShardsAsync, request)
   }
 
   def shutdown(): Unit = client.shutdown()
@@ -120,6 +121,11 @@ class AmazonKinesisClient(
   private def invoke[Request <: AmazonWebServiceRequest, Result](
       method: (Request, AsyncHandler[Request, Result]) => java.util.concurrent.Future[Result],
       request: Request): Future[Result] = {
+
+    val opts = request.getRequestClientOptions()
+    if (opts.getClientMarker(RequestClientOptions.Marker.USER_AGENT) == null) {
+      opts.appendUserAgent("aws-scala-sdk")
+    }
 
     val promise = Promise[Result]
 
@@ -134,6 +140,11 @@ class AmazonKinesisClient(
   private def invokeVoid[Request <: AmazonWebServiceRequest](
       method: (Request, AsyncHandler[Request, Void]) => java.util.concurrent.Future[Void],
       request: Request): Future[Unit] = {
+
+    val opts = request.getRequestClientOptions()
+    if (opts.getClientMarker(RequestClientOptions.Marker.USER_AGENT) == null) {
+      opts.appendUserAgent("aws-scala-sdk")
+    }
 
     val promise = Promise[Unit]
     

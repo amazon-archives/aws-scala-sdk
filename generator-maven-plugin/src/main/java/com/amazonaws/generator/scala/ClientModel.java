@@ -35,9 +35,9 @@ public final class ClientModel {
         }
     }
 
-    private String pkg;
-    private String classPrefix;
-    private List<OperationModel> operations;
+    private final String pkg;
+    private final String classPrefix;
+    private final List<OperationModel> operations;
 
     public ClientModel(String pkg, String classPrefix) {
         this.pkg = pkg;

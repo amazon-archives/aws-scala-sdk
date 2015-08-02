@@ -49,7 +49,7 @@ public final class ClientModel {
                 classPrefix);
 
         try {
-            List<OperationModel> list = new ArrayList<>();
+            List<OperationModel> list = new ArrayList<OperationModel>();
 
             Class<?> clazz = Class.forName(name);
             for (Method method : clazz.getMethods()) {

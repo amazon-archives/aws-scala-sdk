@@ -23,14 +23,15 @@ import java.lang.reflect.Type;
  */
 public final class OperationModel {
 
-    private String methodName;
-    private String requestType;
-    private String resultType;
-    private String invokeSuffix;
+    private final String methodName;
+    private final String requestType;
+    private final String resultType;
+    private final String javaResultType;
+    private final String result;
 
     public OperationModel(Method method) {
         this.methodName = method.getName().substring(0, method.getName().length() - 5);
-        this.requestType = method.getParameters()[0].getType().getCanonicalName();
+        this.requestType = method.getParameters()[0].getType().getSimpleName();
 
         Type rtype = method.getGenericReturnType();
         if (!(rtype instanceof ParameterizedType)) {
@@ -39,11 +40,13 @@ public final class OperationModel {
 
         Type ptype = ((ParameterizedType) rtype).getActualTypeArguments()[0];
         if (ptype == Void.class) {
-            this.resultType = "BoxedUnit";
-            this.invokeSuffix = "Void";
+            this.resultType = "scala.runtime.BoxedUnit";
+            this.javaResultType = "Void";
+            this.result = "scala.runtime.BoxedUnit.UNIT";
         } else {
-            this.resultType = ((Class<?>) ptype).getCanonicalName();
-            this.invokeSuffix = "";
+            this.resultType = ((Class<?>) ptype).getSimpleName();
+            this.javaResultType = this.resultType;
+            this.result = "result";
         }
     }
 
@@ -59,7 +62,11 @@ public final class OperationModel {
         return resultType;
     }
 
-    public String getInvokeSuffix() {
-        return invokeSuffix;
+    public String getJavaResultType() {
+        return javaResultType;
+    }
+
+    public String getResult() {
+        return result;
     }
 }

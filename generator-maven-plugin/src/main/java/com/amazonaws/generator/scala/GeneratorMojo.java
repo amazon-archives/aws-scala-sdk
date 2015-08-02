@@ -70,15 +70,18 @@ public class GeneratorMojo extends AbstractMojo {
         ClientModel model = new ClientModel(pkg, classPrefix);
 
         String path = String.format(
-                "com/amazonaws/services/%s/scala/%sClient.java",
+                "com/amazonaws/services/%s/scala/%sClient.scala",
                 pkg,
                 classPrefix);
 
         File file = new File(baseDir, path);
         file.getParentFile().mkdirs();
 
-        try (Writer writer = new FileWriter(file)) {
+        Writer writer = new FileWriter(file);
+        try {
             template.process(model, writer);
+        } finally {
+            writer.close();
         }
     }
 }

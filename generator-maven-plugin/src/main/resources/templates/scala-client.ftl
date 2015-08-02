@@ -12,109 +12,66 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.amazonaws.services.${package}.scala;
+package com.amazonaws.services.${package}.scala
 
-import java.util.function.BiFunction;
+import com.amazonaws.services.${package}.${classPrefix}Async
+import com.amazonaws.services.${package}.${classPrefix}AsyncClient
+import com.amazonaws.services.${package}.model._
 
-import scala.concurrent.Future;
-import scala.concurrent.Promise;
-import scala.concurrent.Promise$;
-import scala.runtime.BoxedUnit;
+/** A Scala-friendly wrapper around a {@code ${classPrefix}Async}. */
+class ${classPrefix}Client(private val client: ${classPrefix}Async) {
 
-import com.amazonaws.AmazonWebServiceRequest;
-import com.amazonaws.handlers.AsyncHandler;
-import com.amazonaws.regions.Region;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.regions.RegionUtils;
-import com.amazonaws.services.${package}.${classPrefix}Async;
-import com.amazonaws.services.${package}.${classPrefix}AsyncClient;
+  /** Creates a client for the given region.
+    *
+    * @param region the region
+    */
+  def this(region: com.amazonaws.regions.Region) =
+    this({
+      val client = new ${classPrefix}AsyncClient()
+      client.setRegion(region)
+      client
+    })
 
-public class ${classPrefix}Client {
+  /** Creates a client for the given region.
+    *
+    * @param region the region
+    */
+  def this(region: com.amazonaws.regions.Regions) =
+    this(com.amazonaws.regions.Region.getRegion(region))
 
-    private final ${classPrefix}Async client;
-
-    public ${classPrefix}Client(String region) {
-        this(RegionUtils.getRegion(region));
-    }
-
-    public ${classPrefix}Client(Regions region) {
-        this(Region.getRegion(region));
-    }
-
-    public ${classPrefix}Client(Region region) {
-        this(newClient(region));
-    }
-
-    private static ${classPrefix}AsyncClient newClient(Region region) {
-        if (region == null) {
-            throw new NullPointerException("region");
-        }
-
-        ${classPrefix}AsyncClient client = new ${classPrefix}AsyncClient();
-        client.setRegion(region);
-        return client;
-    }
-
-    public ${classPrefix}Client(${classPrefix}Async client) {
-        if (client == null) {
-            throw new NullPointerException("client");
-        }
-        this.client = client;
-    }
+  /** Creates a client for the given region.
+    *
+    * @param region the region
+    */
+  def this(region: String) =
+    this(com.amazonaws.regions.RegionUtils.getRegion(region))
 
 <#list operations as operation>
-    public Future<${operation.resultType}> ${operation.methodName}(
-            ${operation.requestType} request) {
+  /** Invokes the {@code ${operation.methodName}Async} method of the underlying
+    * client and adapts the result to a scala {@code Future}.
+    *
+    * @param request the request to send
+    * @return the future result
+    */
+  def ${operation.methodName}(request: ${operation.requestType}):
+      scala.concurrent.Future[${operation.resultType}] = {
 
-        return invoke${operation.invokeSuffix}(client::${operation.methodName}Async, request);
+    val opts = request.getRequestClientOptions()
+    if (opts.getClientMarker(com.amazonaws.RequestClientOptions.Marker.USER_AGENT) == null) {
+      opts.appendUserAgent("aws-scala-sdk")
     }
+
+    val promise = scala.concurrent.Promise[${operation.resultType}]
+
+    client.${operation.methodName}Async(request, new com.amazonaws.handlers.AsyncHandler[${operation.requestType}, ${operation.javaResultType}]() {
+      override def onSuccess(request: ${operation.requestType}, result: ${operation.javaResultType}) = promise.success(${operation.result})
+      override def onError(exception: Exception) = promise.failure(exception)
+    })
+
+    promise.future
+  }
 
 </#list>
-    public void shutdown() {
-        client.shutdown();
-    }
-
-    private <I extends AmazonWebServiceRequest, O> Future<O> invoke(
-            BiFunction<I, AsyncHandler<I, O>, java.util.concurrent.Future<O>> f,
-            I request) {
-
-        final Promise<O> promise = Promise$.MODULE$.apply();
-
-        f.apply(request, new AsyncHandler<I, O>() {
-
-            @Override
-            public void onSuccess(I request, O result) {
-                promise.success(result);
-            }
-
-            @Override
-            public void onError(Exception exception) {
-                promise.failure(exception);
-            }
-        });
-
-        return promise.future();
-    }
-
-    private <I extends AmazonWebServiceRequest> Future<BoxedUnit> invokeVoid(
-            BiFunction<I, AsyncHandler<I, Void>, java.util.concurrent.Future<Void>> f,
-            I request) {
-
-        final Promise<BoxedUnit> promise = Promise$.MODULE$.apply();
-
-        f.apply(request, new AsyncHandler<I, Void>() {
-
-            @Override
-            public void onSuccess(I request, Void result) {
-                promise.success(BoxedUnit.UNIT);
-            }
-
-            @Override
-            public void onError(Exception exception) {
-                promise.failure(exception);
-            }
-        });
-
-        return promise.future();
-    }
+  /** Shuts down this client. */
+  def shutdown(): Unit = client.shutdown()
 }

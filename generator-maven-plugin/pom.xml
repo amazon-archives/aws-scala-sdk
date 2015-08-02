@@ -15,7 +15,6 @@
   <name>AWS SDK for Scala - Generator Plugin</name>
 
   <dependencies>
-
     <dependency>
       <groupId>org.apache.maven.plugin-tools</groupId>
       <artifactId>maven-plugin-tools-api</artifactId>
@@ -31,9 +30,7 @@
     <dependency>
       <groupId>org.freemarker</groupId>
       <artifactId>freemarker</artifactId>
-      <version>2.3.23</version>
     </dependency>
-
   </dependencies>
 
   <build>

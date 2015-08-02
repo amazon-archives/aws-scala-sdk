@@ -1,0 +1,10 @@
+parentPomVersion: 0.0.1-SNAPSHOT
+sdkVersion: 1.10.7
+modules:
+ -
+  name: kinesis
+  classPrefix: AmazonKinesis
+ -
+  name: dynamodb
+  classPrefix: AmazonDynamoDB
+  package: dynamodbv2

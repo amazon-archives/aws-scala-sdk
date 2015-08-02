@@ -6,8 +6,8 @@
 
   <parent>
     <groupId>com.amazonaws.scala</groupId>
-    <artifactId>parent-pom</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>aggregator</artifactId>
+    <version>1.10.7</version>
   </parent>
 
   <artifactId>dynamodb</artifactId>
@@ -38,7 +38,7 @@
           <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-dynamodb</artifactId>
-            <version>${aws.sdk.version}</version>
+            <version>${project.version}</version>
           </dependency>
         </dependencies>
       </plugin>

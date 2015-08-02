@@ -89,30 +89,21 @@
         </plugin>
 
         <plugin>
-          <groupId>org.eclipse.m2e</groupId>
-          <artifactId>lifecycle-mapping</artifactId>
-          <version>1.0.0</version>
+          <groupId>net.alchim31.maven</groupId>
+          <artifactId>scala-maven-plugin</artifactId>
+          <version>3.2.1</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>compile</goal>
+                <goal>testCompile</goal>
+              </goals>
+            </execution>
+          </executions>
           <configuration>
-            <lifecycleMappingMetadata>
-              <pluginExecutions>
-                <pluginExecution>
-                  <pluginExecutionFilter>
-                    <groupId>com.amazonaws.scala</groupId>
-                    <artifactId>generator-maven-plugin</artifactId>
-                    <versionRange>[0.0.1-SNAPSHOT,)</versionRange>
-                    <goals>
-                      <goal>generate</goal>
-                    </goals>
-                  </pluginExecutionFilter>
-                  <action>
-                    <ignore></ignore>
-                  </action>
-                </pluginExecution>
-              </pluginExecutions>
-            </lifecycleMappingMetadata>
+            <sourceDir>target/generated-sources/aws-scala-sdk</sourceDir>
           </configuration>
         </plugin>
-
       </plugins>
     </pluginManagement>
   </build>
@@ -120,6 +111,7 @@
   <modules>
     <module>generator-maven-plugin</module>
     <module>kinesis</module>
+    <module>dynamodb</module>
   </modules>
 
 </project>

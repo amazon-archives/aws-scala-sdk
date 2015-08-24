@@ -35,6 +35,9 @@ public final class Freemarker {
         CONFIGURATION = config;
     }
 
+    /**
+     * @return the freemarker template for generating a Scala client wrapper
+     */
     public Template getClientTemplate() {
         try {
             return CONFIGURATION.getTemplate("scala-client.ftl");

@@ -29,7 +29,8 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 /**
- *
+ * Mojo that generates a Scala wrapper for a client class from the AWS SDK for
+ * Java.
  */
 @Mojo(name = "generate")
 public class GeneratorMojo extends AbstractMojo {

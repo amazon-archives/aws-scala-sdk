@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Model type representing the client wrapper.
  */
 public final class ClientModel {
 
@@ -27,6 +27,9 @@ public final class ClientModel {
     private static final Class<?> ASYNC_HANDLER;
 
     static {
+        // Grab these via reflection to avoid hardcoding a dependency on a
+        // particular version of the SDK here. The user is responsible for
+        // adding an appropriate version of the SDK to the classpath.
         try {
             AMAZON_WEB_SERVICE_REQUEST = Class.forName("com.amazonaws.AmazonWebServiceRequest");
             ASYNC_HANDLER = Class.forName("com.amazonaws.handlers.AsyncHandler");
@@ -39,7 +42,14 @@ public final class ClientModel {
     private final String classPrefix;
     private final List<OperationModel> operations;
 
+    /**
+     * @param pkg the name of the Java package the target client belongs to (ie
+     *            'kinesis' for 'com.amazonaws.services.kinesis._)
+     * @param classPrefix the initial part of the class name (ie 'AmazonKinesis'
+     *            for 'AmazonKinesisClientAsync')
+     */
     public ClientModel(String pkg, String classPrefix) {
+
         this.pkg = pkg;
         this.classPrefix = classPrefix;
 
@@ -69,14 +79,23 @@ public final class ClientModel {
         }
     }
 
+    /**
+     * @return the package (under com.amazonaws.services) to generate under
+     */
     public String getPackage() {
         return pkg;
     }
 
+    /**
+     * @return the start of the class name to generate
+     */
     public String getClassPrefix() {
         return classPrefix;
     }
 
+    /**
+     * @return the list of operations for the client
+     */
     public List<OperationModel> getOperations() {
         return operations;
     }

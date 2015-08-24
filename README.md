@@ -17,3 +17,6 @@ val client = new AmazonKinesisClient("us-west-2")
 client.listStreams(new ListStreamsRequest()).
   map((r: ListStreamsResult) => r.getStreams())
 ```
+## Contributing
+
+Feature and pull requests welcome!

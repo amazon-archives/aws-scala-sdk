@@ -18,7 +18,7 @@ import com.amazonaws.services.${package}.${classPrefix}Async
 import com.amazonaws.services.${package}.${classPrefix}AsyncClient
 import com.amazonaws.services.${package}.model._
 
-/** A Scala-friendly wrapper around a {@code ${classPrefix}Async}. */
+/** A Scala-friendly wrapper around an {@code ${classPrefix}Async}. */
 class ${classPrefix}Client(private val client: ${classPrefix}Async) {
 
   /** Creates a client for the given region.
@@ -48,7 +48,7 @@ class ${classPrefix}Client(private val client: ${classPrefix}Async) {
 
 <#list operations as operation>
   /** Invokes the {@code ${operation.methodName}Async} method of the underlying
-    * client and adapts the result to a scala {@code Future}.
+    * client and adapts the result to a Scala {@code Future}.
     *
     * @param request the request to send
     * @return the future result

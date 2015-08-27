@@ -35,6 +35,9 @@ public final class Freemarker {
         CONFIGURATION = config;
     }
 
+    /**
+     * @return the template for the aggregator POM
+     */
     public Template getAggregatorTemplate() {
         try {
             return CONFIGURATION.getTemplate("aggregator-pom.ftl");
@@ -43,6 +46,9 @@ public final class Freemarker {
         }
     }
 
+    /**
+     * @return the template for an individual client POM
+     */
     public Template getPomTemplate() {
         try {
             return CONFIGURATION.getTemplate("pom.ftl");

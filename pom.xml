@@ -11,6 +11,7 @@
 
   <name>AWS SDK for Scala - Parent POM</name>
   <description>It's like the AWS SDK for Java, but more Scala-y</description>
+  <url>https://github.com/awslabs/aws-scala-sdk</url>
 
   <licenses>
     <license>
@@ -35,7 +36,6 @@
     <connection>scm:git:ssh://git@github.com/awslabs/aws-scala-sdk.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/awslabs/aws-scala-sdk.git</developerConnection>
     <url>https://github.com/awslabs/aws-scala-sdk</url>
-    <tag>HEAD</tag>
   </scm>
 
   <properties>

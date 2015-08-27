@@ -31,6 +31,13 @@
     </developer>
   </developers>
 
+  <scm>
+    <connection>scm:git:ssh://git@github.com/awslabs/aws-scala-sdk.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/awslabs/aws-scala-sdk.git</developerConnection>
+    <url>https://github.com/awslabs/aws-scala-sdk</url>
+    <tag>HEAD</tag>
+  </scm>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -113,4 +120,42 @@
     <module>generator-maven-plugin</module>
     <module>project-generator</module>
   </modules>
+
+  <profiles>
+    <profile>
+      <id>publishing</id>
+      <build>
+        <plugins>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>sonatype-nexus-staging</serverId>
+              <nexusUrl>https://oss.sonatype.org</nexusUrl>
+            </configuration>
+          </plugin>
+
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 </project>

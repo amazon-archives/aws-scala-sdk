@@ -4,7 +4,7 @@
 
   <groupId>com.amazonaws.scala</groupId>
   <artifactId>parent-pom</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>AWS SDK for Scala - Parent POM</name>
@@ -34,7 +34,7 @@
     <connection>scm:git:ssh://git@github.com/awslabs/aws-scala-sdk.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/awslabs/aws-scala-sdk.git</developerConnection>
     <url>https://github.com/awslabs/aws-scala-sdk</url>
-    <tag>0.0.1</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <properties>

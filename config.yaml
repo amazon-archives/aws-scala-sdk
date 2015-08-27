@@ -1,0 +1,49 @@
+parentPomVersion: 0.0.1-SNAPSHOT
+sdkVersion: 1.10.7
+modules:
+ -
+  name: cloudwatch
+  classPrefix: AmazonCloudWatch
+ -
+  name: dynamodb
+  package: dynamodbv2
+  classPrefix: AmazonDynamoDB
+ -
+  name: ec2
+  classPrefix: AmazonEC2
+ -
+  name: ecs
+  classPrefix: AmazonECS
+  serviceName: EC2 Container Service
+ -
+  name: kinesis
+  classPrefix: AmazonKinesis
+ -
+  name: lambda
+  classPrefix: AWSLambda
+ -
+  name: logs
+  classPrefix: AWSLogs
+  serviceName: CloudWatch Logs
+ -
+  name: machinelearning
+  classPrefix: AmazonMachineLearning
+  serviceName: Amazon Machine Learning
+ -
+  name: ses
+  package: simpleemail
+  classPrefix: AmazonSimpleEmailService
+  serviceName: Simple Email Service
+ -
+  name: sns
+  classPrefix: AmazonSNS
+  serviceName: Simple Queue Service
+ -
+  name: sqs
+  classPrefix: AmazonSQS
+  serviceName: Simple Queue Service
+ -
+  name: sts
+  package: securitytoken
+  classPrefix: AWSSecurityTokenService
+  serviceName: Security Token Service

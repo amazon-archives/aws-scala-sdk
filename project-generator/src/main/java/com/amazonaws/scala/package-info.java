@@ -1,0 +1,4 @@
+/**
+ * 
+ */
+package com.amazonaws.scala;

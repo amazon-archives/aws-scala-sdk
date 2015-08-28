@@ -1,5 +1,5 @@
-parentPomVersion: 0.0.1-SNAPSHOT
-sdkVersion: 1.10.7
+parentPomVersion: 0.0.2-SNAPSHOT
+sdkVersion: 1.10.14
 modules:
  -
   name: cloudwatch

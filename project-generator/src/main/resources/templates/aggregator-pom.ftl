@@ -44,13 +44,35 @@
             </execution>
           </executions>
         </plugin>
+        <plugin>
+          <groupId>net.alchim31.maven</groupId>
+          <artifactId>scala-maven-plugin</artifactId>
+          <executions>
+            <execution>
+              <goals>
+                <goal>doc-jar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>2.4</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
 
   <modules>
    <#list modules as module>
-    <module>${module.name}</module>
+    <module>aws-scala-sdk-${module.name}</module>
    </#list>
   </modules>
 

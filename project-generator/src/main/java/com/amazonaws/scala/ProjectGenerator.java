@@ -71,7 +71,7 @@ public final class ProjectGenerator {
         // Generate the individual client modules.
         Template pom = freemarker.getPomTemplate();
         for (ModuleModel module : aggregator.getModules()) {
-            File dir = new File(project, module.getName());
+            File dir = new File(project, "aws-scala-sdk-" + module.getName());
             mkdir(dir);
 
             Writer writer = new FileWriter(new File(dir, "pom.xml"));

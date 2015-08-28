@@ -10,7 +10,7 @@
     <version>${sdkVersion}</version>
   </parent>
 
-  <artifactId>${name}</artifactId>
+  <artifactId>aws-scala-sdk-${name}</artifactId>
   <name>AWS SDK for Scala - ${serviceName}</name>
 
   <dependencies>
@@ -46,6 +46,10 @@
       <plugin>
         <groupId>net.alchim31.maven</groupId>
         <artifactId>scala-maven-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
       </plugin>
     </plugins>
   </build>

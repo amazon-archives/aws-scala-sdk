@@ -12,7 +12,7 @@
 # limitations under the License.
 
 # Build and install project-generator and generator-maven-plugin
-mvn clean install
+mvn clean install deploy
 
 # Run the project generator
 pushd project-generator
@@ -21,5 +21,5 @@ popd
 
 # Build and install the project
 pushd project
-mvn clean install
+mvn clean install deploy
 popd

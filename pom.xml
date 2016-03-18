@@ -59,6 +59,19 @@
     </dependencies>
   </dependencyManagement>
 
+  <distributionManagement>
+      <repository>
+          <id>echo360-public-releases</id>
+          <name>Echo360 Public Releases</name>
+          <url>https://artifactory.echo360.net/artifactory/echo360-public-releases</url>
+      </repository>
+      <snapshotRepository>
+          <id>echo360-public-snapshots</id>
+          <name>Echo360 Public Snapshots</name>
+          <url>https://artifactory.echo360.net/artifactory/echo360-public-snapshots</url>
+      </snapshotRepository>
+  </distributionManagement>
+
   <build>
     <pluginManagement>
       <plugins>

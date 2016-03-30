@@ -2,7 +2,7 @@
 
 [![Join the chat at https://gitter.im/awslabs/aws-scala-sdk](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/awslabs/aws-scala-sdk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-It's like the [AWS SDK for Java](https://github.com/aws/aws-java-sdk), but more Scala-y.
+It's like the [AWS SDK for Java](https://github.com/aws/aws-sdk-java), but more Scala-y.
 
 ## Building
 

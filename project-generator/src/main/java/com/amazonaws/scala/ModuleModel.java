@@ -25,6 +25,7 @@ public final class ModuleModel {
     private final String classPrefix;
     private final String serviceName;
     private final String pkg;
+    private final String shutdownSupported;
 
     private String sdkVersion;
 
@@ -33,12 +34,14 @@ public final class ModuleModel {
      * @param classPrefix the class prefix (ie 'AmazonKinesis')
      * @param serviceName the (optional) name of the service (ie 'Kinesis')
      * @param pkg the Java package name to use, if different than {@code name}
+     * @param shutdownSupported whether the service supports shutdown, default = true
      */
     public ModuleModel(
             @JsonProperty(value="name", required=true) String name,
             @JsonProperty(value="classPrefix", required=true) String classPrefix,
             @JsonProperty(value="serviceName") String serviceName,
-            @JsonProperty(value="package") String pkg) {
+            @JsonProperty(value="package") String pkg,
+            @JsonProperty(value="shutdownSupported") String shutdownSupported) {
 
         this.name = name;
         this.classPrefix = classPrefix;
@@ -57,6 +60,12 @@ public final class ModuleModel {
             this.pkg = pkg;
         } else {
             this.pkg = name;
+        }
+
+        if (shutdownSupported != null) {
+            this.shutdownSupported = Boolean.valueOf(shutdownSupported).toString();
+        } else {
+            this.shutdownSupported = Boolean.TRUE.toString();
         }
     }
 
@@ -86,6 +95,13 @@ public final class ModuleModel {
      */
     public String getPackage() {
         return pkg;
+    }
+
+    /**
+     * @return whether the services supports the shutdown() method
+     */
+    public String getShutdownSupported() {
+        return shutdownSupported;
     }
 
     /**

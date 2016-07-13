@@ -33,6 +33,7 @@
         <configuration>
           <pkg>${package}</pkg>
           <classPrefix>${classPrefix}</classPrefix>
+          <shutdownSupported>${shutdownSupported}</shutdownSupported>
         </configuration>
         <dependencies>
           <dependency>

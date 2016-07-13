@@ -1,5 +1,5 @@
 parentPomVersion: 0.0.2-SNAPSHOT
-sdkVersion: 1.10.64
+sdkVersion: 1.11.15
 modules:
  -
   name: cloudwatch
@@ -34,10 +34,19 @@ modules:
   classPrefix: AmazonMachineLearning
   serviceName: Amazon Machine Learning
  -
+  name: route53
+  classPrefix: AmazonRoute53
+  serviceName: Route53
+ -
   name: ses
   package: simpleemail
   classPrefix: AmazonSimpleEmailService
   serviceName: Simple Email Service
+ -
+  name: simpledb
+  classPrefix: AmazonSimpleDB
+  serviceName: SimpleDB
+  shutdownSupported: false
  -
   name: sns
   classPrefix: AmazonSNS

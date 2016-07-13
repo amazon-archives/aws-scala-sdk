@@ -49,6 +49,9 @@ public class GeneratorMojo extends AbstractMojo {
     @Parameter(required = true)
     private String classPrefix;
 
+    @Parameter(required = true)
+    private boolean shutdownSupported;
+
     public GeneratorMojo() {
         freemarker = new Freemarker();
     }
@@ -68,7 +71,7 @@ public class GeneratorMojo extends AbstractMojo {
 
         Template template = freemarker.getClientTemplate();
 
-        ClientModel model = new ClientModel(pkg, classPrefix);
+        ClientModel model = new ClientModel(pkg, classPrefix, shutdownSupported);
 
         String path = String.format(
                 "com/amazonaws/services/%s/scala/%sClient.scala",

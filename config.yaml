@@ -37,7 +37,7 @@ modules:
  -
   name: sns
   classPrefix: AmazonSNS
-  serviceName: Simple Queue Service
+  serviceName: Simple Notification Service
  -
   name: sqs
   classPrefix: AmazonSQS

@@ -40,6 +40,7 @@ public final class ClientModel {
 
     private final String pkg;
     private final String classPrefix;
+    private final boolean shutdownSupported;
     private final List<OperationModel> operations;
 
     /**
@@ -48,10 +49,11 @@ public final class ClientModel {
      * @param classPrefix the initial part of the class name (ie 'AmazonKinesis'
      *            for 'AmazonKinesisClientAsync')
      */
-    public ClientModel(String pkg, String classPrefix) {
+    public ClientModel(String pkg, String classPrefix, boolean shutdownSupported) {
 
         this.pkg = pkg;
         this.classPrefix = classPrefix;
+        this.shutdownSupported = shutdownSupported;
 
         String name = String.format(
                 "com.amazonaws.services.%s.%sAsync",
@@ -91,6 +93,13 @@ public final class ClientModel {
      */
     public String getClassPrefix() {
         return classPrefix;
+    }
+
+    /**
+     * @return the start of the class name to generate
+     */
+    public boolean isShutdownSupported() {
+        return shutdownSupported;
     }
 
     /**

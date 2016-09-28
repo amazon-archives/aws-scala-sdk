@@ -72,6 +72,8 @@ class ${classPrefix}Client(private val client: ${classPrefix}Async) {
   }
 
 </#list>
+<#if shutdownSupported>
   /** Shuts down this client. */
   def shutdown(): Unit = client.shutdown()
+</#if>
 }

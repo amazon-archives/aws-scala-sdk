@@ -62,7 +62,32 @@
   <build>
     <pluginManagement>
       <plugins>
-
+        
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-plugin-plugin</artifactId>
+            <version>3.2</version>
+            <configuration>
+                <goalPrefix>mysql-jdbc-compliance</goalPrefix>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>default-descriptor</id>
+                    <goals>
+                        <goal>descriptor</goal>
+                    </goals>
+                    <phase>process-classes</phase>
+                </execution>
+                <execution>
+                    <id>help-descriptor</id>
+                    <goals>
+                        <goal>helpmojo</goal>
+                    </goals>
+                    <phase>process-classes</phase>
+                </execution>
+            </executions>
+        </plugin>
+        
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.3</version>
